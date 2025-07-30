@@ -8,17 +8,27 @@ import SadFlow from "./flows/Sad/SadFlow";
 import NumbFlow from "./flows/Numb/NumbFlow";
 import OverthinkFlow from "./flows/Overthinking/OverthinkFlow";
 import Journal from "./pages/Journal";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { Navigate } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/flow/:emotion" element={<FlowPage />} />
+      <Route
+          path="/flow/:emotion"
+          element={
+            localStorage.getItem("token") ? <FlowPage /> : <Navigate to="/signup" />
+          }
+        />
       <Route path="/flow/panic" element={<PanicFlow />} />
       <Route path="/flow/sad" element={<SadFlow />} />
       <Route path="/flow/numb" element={<NumbFlow />} />
       <Route path="/flow/overthinking" element={<OverthinkFlow />} />
       <Route path="/journal" element={<Journal />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   </BrowserRouter>
 );
