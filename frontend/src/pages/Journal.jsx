@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Journal = () => {
   const [entry, setEntry] = useState("");
@@ -65,6 +66,9 @@ const handleSubmit = async () => {
           >
             Save Entry
           </button>
+          <Link to="/my-journal" className="ml-8 text-green-600 hover:text-green-800 font-medium hover:underline">
+            View My Journal
+          </Link>
         </div>
 
         {submitted && (

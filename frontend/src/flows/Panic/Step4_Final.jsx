@@ -51,7 +51,6 @@ const Step4_Final = () => {
         </Link>
       </div>
 
-      {/* Helpline - bottom right corner */}
       <div className="absolute bottom-4 right-4 text-md text-rose-600 bg-white/70 px-4 py-2 rounded-md shadow">
       <a href="tel:08001234567" className="hover:underline">
         💡 Helpline: <strong>0800-123-4567</strong>
