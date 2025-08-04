@@ -22,6 +22,11 @@ const Navbar = () => {
       </div>
 
       <div className="mr-10">
+        {isLoggedIn && (
+          <a href="/my-journal" className="text-green-600 hover:text-green-800 font-medium hover:underline mr-10">
+            My Journals
+          </a>
+        )}  
         {isLoggedIn ? (
           <button
             onClick={handleLogout}

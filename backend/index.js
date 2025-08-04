@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const auth = require('./routes/auth.js');
+const journalRoutes = require('./routes/journal');
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', auth); 
+app.use('/api/journal', journalRoutes);
 
 // MongoDB connection
 const uri = process.env.MONGODB_URI;
@@ -30,7 +32,7 @@ app.get('/', (req, res) => {
     res.send('SafeLoop API is running');
 });
 
-// Start server
+// server
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
