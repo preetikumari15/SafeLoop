@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const handleAlert = () => {
@@ -6,31 +7,34 @@ const Footer = () => {
   };
 
   return (
-    <footer className="fixed bottom-0 w-full bg-white text-green-800 px-6 py-4 shadow-md z-50">
+    <footer className="w-full bg-white/10 backdrop-blur-sm text-slate-300 px-6 py-4 border-t border-white/20 z-50">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="text-center md:text-left text-md font-medium">
-          You are safe here. One breath at a time. 💚
+          <span className="text-shadow">You are safe here. One breath at a time. 💚</span>
         </div>
-         <span className="text-xs text-gray-500">&copy; {new Date().getFullYear()} SafeLoop</span>
+        
+        <span className="text-xs text-slate-400">
+          &copy; {new Date().getFullYear()} SafeLoop
+        </span>
 
-        <div className="flex space-x-4 text-md">
-          <a
-            href="/journal"
-            className="text-green-700 hover:underline hover:text-green-900"
+        <div className="flex space-x-6 text-md">
+          <Link
+            to="/journal"
+            className="text-slate-300 hover:text-white transition-colors duration-200"
           >
             📓 Journal
-          </a>
+          </Link>
 
           <a
             href="tel:9152987821"
-            className="text-green-700 hover:underline hover:text-green-900"
+            className="text-slate-300 hover:text-white transition-colors duration-200"
           >
             ☎️ 24x7 Helpline
           </a>
 
           <button
             onClick={handleAlert}
-            className="text-red-600 hover:underline font-semibold"
+            className="text-red-400 hover:text-red-300 transition-colors duration-200 font-semibold"
           >
             🚨 Send Alert
           </button>

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Journal = () => {
   const [entry, setEntry] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
 const handleSubmit = async () => {
   if (entry.trim() === "") return;
@@ -13,6 +14,7 @@ const handleSubmit = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Please log in to save journal entries");
+      navigate("/login");
       return;
     }
 
