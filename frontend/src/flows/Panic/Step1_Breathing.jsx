@@ -1,4 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
+
+const SparklingHearts = ({ count = 90 }) => {
+  const hearts = useMemo(() => {
+    return Array.from({ length: count }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 3}s`,
+      size: `${Math.random() * 1 + 0.5}rem`
+    }));
+  }, [count]);
+
+  return hearts.map(heart => (
+    <div
+      key={heart.id}
+      className="absolute text-pink-500/30 animate-float"
+      style={{
+        left: heart.left,
+        top: heart.top,
+        animationDelay: heart.animationDelay,
+        fontSize: heart.size
+      }}
+    >
+      💖
+    </div>
+  ));
+};
 
 const Step1_Breathing = ({ next }) => {
   const audioRef = useRef(null);
@@ -75,28 +102,114 @@ const Step1_Breathing = ({ next }) => {
     };
   }, [next]);
 
-  return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen p-8 text-center bg-gradient-to-b from-blue-100 via-blue-50 to-white">
-      <h2 className="text-4xl font-bold mb-8 text-gray-800">Let’s Breathe Together</h2>
-
-      <div className="relative w-20 h-20 mb-6">
-        <div className="absolute inset-0 bg-blue-300 rounded-full animate-breath shadow-xl" />
+    return (
+    <div className="relative min-h-screen bg-slate-900 font-sans antialiased">
+     
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-slate-900 to-indigo-900/50" />
+        <SparklingHearts count={30} />
       </div>
 
-      <p className="mb-6 text-3xl font-medium text-blue-700">
-        {phase}... {countdown > 0 && <span className="font-bold">{countdown}</span>}
-      </p>
+      
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 text-center">
+        <h2 className="text-8xl font-bold mb-12 text-white text-shadow-lg">
+          Let's Breathe Together
+        </h2>
 
-      <audio ref={audioRef} src="/breathing.mp3" loop />
+       
+        <div className="relative w-40 h-40 mb-10">
+          <div 
+            className={`absolute inset-0 flex items-center justify-center text-8xl
+              ${phase === "Inhale" ? "animate-heart-expand" : 
+                phase === "Exhale" ? "animate-heart-contract" : 
+                "animate-heart-pulse"}`}
+          >
+            <div className="relative">
+              <span className="absolute inset-0 text-pink-500/50 animate-glow filter blur-md">❤️</span>
+              <span className="relative text-pink-500">❤️</span>
+            </div>
+          </div>
+        </div>
 
-      {!isCompleted && (
-        <button
-          onClick={next}
-          className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition-all shadow-md"
-        >
-          Skip to Next
-        </button>
-      )}
+        <p className="mb-8 text-5xl font-medium text-slate-300 text-shadow">
+          {phase}
+          {countdown > 0 && (
+            <span className="ml-4 font-bold text-white">
+              {countdown}
+            </span>
+          )}
+        </p>
+        <audio ref={audioRef} src="/breathing.mp3" loop />
+
+        {!isCompleted && (
+          <button
+            onClick={next}
+            className="mt-8 px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
+              border border-white/20 text-white hover:bg-white/20 
+              transition-all duration-300 text-xl font-medium
+              hover:scale-105 focus:outline-none focus:ring-2 
+              focus:ring-white/50"
+          >
+            Continue →
+          </button>
+        )}
+      </div>
+
+      
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+          50% { transform: translateY(-20px) rotate(10deg); opacity: 0.6; }
+        }
+
+        @keyframes glow {
+          0%, 100% { opacity: 0.5; filter: blur(4px); }
+          50% { opacity: 0.8; filter: blur(8px); }
+        }
+
+        @keyframes heart-expand {
+          from { transform: scale(1); }
+          to { transform: scale(1.3); }
+        }
+
+        @keyframes heart-contract {
+          from { transform: scale(1.3); }
+          to { transform: scale(1); }
+        }
+
+        @keyframes heart-pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-glow {
+          animation: glow 2s ease-in-out infinite;
+        }
+
+        .animate-heart-expand {
+          animation: heart-expand 4s ease-in-out infinite;
+        }
+        
+         .animate-heart-contract {
+          animation: heart-contract 4s ease-in-out infinite;
+        }
+
+        .animate-heart-pulse {
+          animation: heart-pulse 2s ease-in-out infinite;
+        }
+
+        .text-shadow {
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .text-shadow-lg {
+          text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+      `}</style>
     </div>
   );
 };

@@ -1,5 +1,22 @@
 import React, { useEffect, useRef } from "react";
 
+const WaterDrops = ({ count = 30 }) => {
+  return [...Array(count)].map((_, i) => (
+    <div
+      key={i}
+      className="absolute text-blue-500/30 animate-drop"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `-20px`,
+        animationDelay: `${Math.random() * 3}s`,
+        animationDuration: `${Math.random() * 2 + 2}s`
+      }}
+    >
+      💧
+    </div>
+  ));
+};
+
 const Step3_DrinkWater = ({ next }) => {
   const audioRef = useRef(null);
 
@@ -17,28 +34,74 @@ const Step3_DrinkWater = ({ next }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen bg-gradient-to-br from-blue-100 via-white to-blue-50 p-8 text-center relative overflow-hidden">
-      <img
-        src="/water.png"
-        alt="Glass of Water"
-        className="w-48 md:w-64 transform rotate-12 drop-shadow-xl z-10 mb-8"
-      />
+    <div className="relative min-h-screen bg-slate-900 font-sans antialiased overflow-hidden">
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 via-slate-900 to-indigo-900/50" />
+        <WaterDrops />
+      </div>
 
-      <h1 className="text-4xl md:text-4xl font-semibold text-blue-500 mb-4 z-10">
-        Drink some water
-      </h1>
-      <p className="text-xl md:text-2xl text-gray-600 z-10">
-        You're safe! This will pass too.
-      </p>
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-12 text-center">
+        <div >
+          <div className="relative mb-8">
+            <span className="absolute inset-0 text-9xl animate-float filter blur-md opacity-50">
+              🥤
+            </span>
+            <span className="relative text-9xl animate-float">
+              🥤
+            </span>
+          </div>
 
-      <audio ref={audioRef} src="/rain.mp3" loop />
+          <h1 className="text-7xl font-bold text-white text-shadow-xl mb-8">
+            Drink some water
+          </h1>
+          
+          <p className="text-3xl text-slate-300 text-shadow mb-10">
+            You're safe! This will pass too. 💙
+          </p>
 
-      <button
-        onClick={next}
-        className="mt-8 bg-sky-200 hover:bg-sky-400 text-gray px-6 py-3 rounded-full shadow-md transition-all z-10"
-      >
-        Continue
-      </button>
+          <button
+            onClick={next}
+            className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
+              border border-white/20 text-white hover:bg-white/20 
+              transition-all duration-300 text-xl font-medium
+              hover:scale-105 focus:outline-none focus:ring-2 
+              focus:ring-white/50"
+          >
+            Continue ✨
+          </button>
+        </div>
+
+        <audio ref={audioRef} src="/rain.mp3" loop />
+      </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+
+        @keyframes drop {
+          0% { transform: translateY(-20px); opacity: 0; }
+          50% { opacity: 0.6; }
+          100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-drop {
+          animation: drop 3s linear infinite;
+        }
+
+        .text-shadow {
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .text-shadow-lg {
+          text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+      `}</style>
     </div>
   );
 };

@@ -46,14 +46,14 @@ const App = () => {
   );
 }
 
-const Sparkles = ({ count = 40 }) => {
+const Sparkles = ({ count = 200 }) => {
   const sparkles = useMemo(() => {
     return Array.from({ length: count }).map((_, i) => {
       const style = {
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
-        animationDuration: `${Math.random() * 2 + 3}s`,
-        animationDelay: `${Math.random() * 5}s`,
+        animationDuration: `${Math.random() * 2 + 2}s`,
+        animationDelay: `${Math.random() * 2}s`,
       };
       return <div key={i} className="sparkle" style={style} />;
     });
@@ -65,7 +65,7 @@ const Sparkles = ({ count = 40 }) => {
 const DreamyBackground = () => {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-purple-900">
-      <Sparkles count={50} />
+      <Sparkles count={70} />
       <div className="absolute inset-0 filter blur-3xl brightness-75">
         <div
           className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-pink-500/50 rounded-full"

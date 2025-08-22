@@ -9,6 +9,22 @@ const prompts = [
   { icon: "👅", text: "Focus on 1 thing you can taste." },
 ];
 
+const FloatingStars = ({ count = 80 }) => {
+  return [...Array(count)].map((_, i) => (
+    <div
+      key={i}
+      className="absolute text-yellow-500/30 animate-twinkle"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 3}s`,
+      }}
+    >
+      ✨
+    </div>
+  ));
+};
+
 const Step2_Grounding = ({ next }) => {
   const [index, setIndex] = useState(0);
   const audioRef = useRef(null);
@@ -37,43 +53,81 @@ const Step2_Grounding = ({ next }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-green-100 to-white p-8 text-center">
-      <h2 className="text-4xl font-semibold text-green-800 mb-6">
-        Ground Yourself 🌿
-      </h2>
-      <h2 className="text-3xl font-semibold text-green-800 mb-6">
-        I'm here with you!
-        </h2>
-
-      <div className="mb-8 text-sm text-gray-500">
-        Step {index + 1} of {prompts.length}
+    <div className="relative min-h-screen bg-slate-900 font-sans antialiased overflow-hidden">
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/50 via-slate-900 to-purple-900/50" />
+        <FloatingStars />
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -20, scale: 0.95 }}
-          transition={{ duration: 0.4 }}
-          className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md mb-8 border border-green-200"
-        >
-          <div className="text-5xl mb-4">{prompts[index].icon}</div>
-          <p className="text-lg text-gray-700">{prompts[index].text}</p>
-        </motion.div>
-      </AnimatePresence>
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 text-center">
+        <h2 className="text-8xl font-bold mb-5 text-white text-shadow-lg">
+          Ground Yourself 🌿
+        </h2>
+        <h3 className="text-5xl font-medium mb-8 text-slate-300 text-shadow">
+          I'm here with you!
+        </h3>
 
-      <button
-        onClick={handleNext}
-        className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full transition-all shadow-md"
-      >
-        {index === prompts.length - 1 ? "Finish Grounding" : "Done ✅"}
-      </button>
+        <div className="mb-8 text-slate-400">
+          Step {index + 1} of {prompts.length}
+        </div>
 
-      <audio ref={audioRef} src="/rain.mp3" loop />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.4 }}
+            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-12 w-full max-w-lg mb-8"
+          >
+            <div className="text-7xl mb-6 animate-float">{prompts[index].icon}</div>
+            <p className="text-3xl text-slate-300">{prompts[index].text}</p>
+          </motion.div>
+        </AnimatePresence>
+
+        <button
+          onClick={handleNext}
+          className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
+            border border-white/20 text-white hover:bg-white/20 
+            transition-all duration-300 text-xl font-medium
+            hover:scale-105 focus:outline-none focus:ring-2 
+            focus:ring-white/50"
+         >
+          {index === prompts.length - 1 ? "Finish Grounding ✨" : "Done ✅"}
+        </button>
+
+        <audio ref={audioRef} src="/rain.mp3" loop />
+      </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; transform: scale(0.8); }
+          50% { opacity: 0.6; transform: scale(1); }
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-twinkle {
+          animation: twinkle 2s ease-in-out infinite;
+        }
+
+        .text-shadow {
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .text-shadow-lg {
+          text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+      `}</style>
     </div>
   );
 };
 
 export default Step2_Grounding;
-
