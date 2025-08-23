@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Step1_Breathing from "./Step1_Breathing";
 import Step2_Grounding from "./Step2_Grounding";
-import Step3_DrinkWater from "./Step3_Drinkwater";
+import Step3_DrinkWater from "./Step3_DrinkWater";
 import Step4_Final from "./Step4_Final";
 
 const PanicFlow = () => {
