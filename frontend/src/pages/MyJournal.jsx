@@ -66,9 +66,9 @@ const MyJournal = () => {
   };
 
   return (
-    <div className="min-h-screen bg-green-50 px-4 py-20">
+    <div className="min-h-screen bg-gradient-to-br from-red-300 to-indigo-300 px-4 py-20">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-semibold text-green-700 mb-10 text-center">
+        <h1 className="text-5xl font-semibold text-black mb-10 text-center">
           📚 Your Journal Entries
         </h1>
         

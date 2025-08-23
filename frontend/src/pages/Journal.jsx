@@ -1,81 +1,120 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { FaFeatherAlt, FaSpinner, FaCheckCircle } from "react-icons/fa";
 
 const Journal = () => {
   const [entry, setEntry] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-const handleSubmit = async () => {
-  if (entry.trim() === "") return;
+  const handleSubmit = async () => {
+    if (entry.trim() === "" || loading) return;
 
-  try {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("Please log in to save journal entries");
-      navigate("/login");
-      return;
-    }
-
-    const response = await axios.post(
-      "http://localhost:4000/api/journal/save",
-      { entry },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please log in to save journal entries");
+        navigate("/login");
+        return;
       }
-    );
 
-    if (response.status === 201) {
-      setSubmitted(true);
-      setTimeout(() => {
-        setEntry("");
-        setSubmitted(false);
-      }, 3000);
+      const response = await axios.post(
+        "http://localhost:4000/api/journal/save",
+        { entry },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setEntry("");
+          setSubmitted(false);
+        }, 3000);
+      }
+    } catch (err) {
+      console.error("Error saving journal:", err);
+      if (err.response?.status === 401) {
+        localStorage.removeItem('token');
+        alert("Your session has expired. Please log in again.");
+        navigate('/login');
+      } else {
+        alert(err.response?.data?.message || "Failed to save entry. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error("Error saving journal:", err);
-    if (err.response?.status === 401) {
-      localStorage.removeItem('token'); 
-      alert("Your session has expired. Please log in again.");
-    } else {
-      alert(err.response?.data?.message || "Failed to save entry. Please try again.");
-    }
-  }
-};
+  };
 
   return (
-    <div className="min-h-screen bg-green-50 flex items-center justify-center px-4 py-20">
-      <div className="bg-white shadow-lg rounded-2xl p-10 w-full max-w-5xl">
-        <h1 className="text-3xl font-semibold text-green-700 mb-10 text-center">📝 Your Safe Journal</h1>
-        <p className="text-gray-600 mb-6 text-center text-lg">
-          This is your space. Write anything on your mind.<br />Only you can read this. No judgment, just release. 💚
+      <div className="min-h-screen relative flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+        <div className="absolute inset-0">
+          <img
+            src="/bg journal.gif" 
+            alt="background"
+            className="w-full h-full object-fill "
+          />
+          <div className="absolute inset-0 "></div>
+        </div>
+
+        <div className="relative z-10 bg-white/80 backdrop-blur-sm shadow-2xl shadow-green-200/50 rounded-3xl p-8 sm:p-12 w-full max-w-4xl transition-all duration-300">
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <FaFeatherAlt className="text-6xl text-green-600" />
+            <h1 className="text-5xl font-bold text-gray-800 text-center">
+              Your Private Journal
+            </h1>
+          </div>
+        
+        <p className="text-gray-600 mb-10 text-center text-xl ">
+          Space for your thoughts. Let it all out, this is just for you. No one can read this 💚
         </p>
-        <textarea
-          rows={8}
-          className="w-full p-6 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300 mb-6"
-          placeholder="Start writing here..."
-          value={entry}
-          onChange={(e) => setEntry(e.target.value)}
-        ></textarea>
-        <div className="text-center">
+
+        <div className="relative">
+          <textarea
+            rows={10}
+            className="w-full p-6 bg-white border-2 border-green-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/30 transition-shadow duration-300 text-gray-700 leading-relaxed text-base"
+            placeholder="What's on your mind today?"
+            value={entry}
+            onChange={(e) => setEntry(e.target.value)}
+            disabled={loading}
+          />
+        </div>
+        
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
           <button
             onClick={handleSubmit}
-            className="mt-4 bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 transition"
+            disabled={loading || entry.trim() === ""}
+            className="w-full sm:w-auto flex items-center justify-center gap-3 bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all duration-300 text-xl font-semibold disabled:bg-gray-400 disabled:cursor-not-allowed transform hover:scale-105"
           >
-            Save Entry
+            {loading ? (
+              <>
+                <FaSpinner className="animate-spin" />
+                <span>Saving...</span>
+              </>
+            ) : (
+              "Save Entry"
+            )}
           </button>
-          <Link to="/my-journal" className="ml-8 text-green-600 hover:text-green-800 font-medium hover:underline">
-            View My Journal
+          
+          <Link 
+            to="/my-journal" 
+            className="text-green-700 hover:text-green-900 font-medium hover:underline transition-colors text-lg"
+          >
+            View All Entries
           </Link>
         </div>
 
         {submitted && (
-          <div className="mt-6 text-green-700 font-medium text-center">
-            ✅ Entry saved. You’re doing great.
+          <div className="mt-8 flex items-center justify-center gap-2 text-green-700 font-medium text-center animate-pulse">
+            <FaCheckCircle />
+            <span>Entry saved successfully. You're doing great.</span>
           </div>
         )}
       </div>
@@ -84,4 +123,3 @@ const handleSubmit = async () => {
 };
 
 export default Journal;
-
