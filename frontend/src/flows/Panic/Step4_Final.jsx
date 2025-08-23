@@ -111,7 +111,7 @@ const Step4_Final = () => {
           {showNoOptions && (
             <div className="flex flex-col gap-6 animate-fade-in">
               <Link
-                to="https://wa.me/9990737980"
+                to={`https://wa.me/${localStorage.getItem("emergencyContact")}`}
                 className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
                   border border-white/20 text-white hover:bg-white/40 
                   transition-all duration-300 text-lg font-medium"

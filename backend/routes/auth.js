@@ -26,7 +26,17 @@ router.post("/signup", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(201).json({ user: newUser, token });
+   res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        emergencyContact: newUser.emergencyContact,
+      },
+      token,
+    });
   } catch (err) {
     res.status(500).json({ message: "Something went wrong" });
   }

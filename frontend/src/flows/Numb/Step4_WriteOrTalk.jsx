@@ -109,7 +109,7 @@ const Step4_WriteOrTalk = () => {
             ✍️ Write it out
           </button>
           <a
-            href="https://wa.me/9990737980" 
+            href={`https://wa.me/${localStorage.getItem("emergencyContact")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-8 py-4 bg-pink-500/50 backdrop-blur-sm rounded-xl
