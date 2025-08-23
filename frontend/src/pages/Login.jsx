@@ -10,7 +10,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://safeloop-o0pc.onrender.com/api/login", {
+      const res = await axios.post("https://safeloop-o0pc.onrender.com/api/auth/login", {
         email,
         password,
       });
