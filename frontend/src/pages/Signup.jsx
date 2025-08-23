@@ -25,7 +25,7 @@ const Signup = () => {
         alert("Signup successful!");
         localStorage.setItem("token", res.data.token);
       localStorage.setItem("emergencyContact", res.data.user.emergencyContact);
-      localStorage.setItem("name", res.data.user.name);
+      localStorage.setItem("username", res.data.user.name);
         navigate("/login");
       } else {
         setError(res.data.message || "Signup failed");
