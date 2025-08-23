@@ -22,7 +22,7 @@ const Journal = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:4000/api/journal/save",
+        "https://safeloop-o0pc.onrender.com/api/journal/save",
         { entry },
         {
           headers: {

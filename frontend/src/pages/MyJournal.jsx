@@ -19,7 +19,7 @@ const MyJournal = () => {
         return;
       }
 
-      const response = await axios.get("http://localhost:4000/api/journal/entries", {
+      const response = await axios.get("https://safeloop-o0pc.onrender.com/api/journal/entries", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
