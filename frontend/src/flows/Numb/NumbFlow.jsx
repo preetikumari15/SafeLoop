@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Step1_Sense from "./Step1_Sense";
 import Step2_Create from "./Step2_Create";
 import Step3_Quiz from "./Step3_Quiz";
-import Step4_WriteOrTalk from "./Step4_WriteorTalk";
+import Step4_WriteOrTalk from "./Step4_WriteOrTalk";
 
 
 const NumbFlow = () => {
