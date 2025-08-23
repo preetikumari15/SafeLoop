@@ -20,7 +20,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://safeloop-o0pc.onrender.com/api/signup", formData);
+      const res = await axios.post("https://safeloop-o0pc.onrender.com/api/auth/signup", formData);
       if (res.data.success) {
         alert("Signup successful!");
         localStorage.setItem("token", res.data.token);
