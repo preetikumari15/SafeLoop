@@ -18,22 +18,34 @@ const App = () => {
 
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
-   
-        <main className="flex-grow flex flex-col items-center justify-center p-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-8 text-white text-shadow-lg">
+
+        <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 text-center pt-24">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white text-shadow-lg leading-snug">
             Hey! What happened?
           </h1>
-          <h2 className="text-2xl md:text-3xl font-bold mb-10 text-slate-300 text-shadow">
-            Tell me, How are you feeling?
+          <h2 className="text-lg sm:text-xl md:text-3xl font-bold mb-6 sm:mb-8 md:mb-10 text-slate-300 text-shadow leading-relaxed">
+            Tell me, how are you feeling?
           </h2>
-          <div className="grid grid-cols-2 gap-8 md:gap-10">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full max-w-3xl">
             {emotions.map((emotion, index) => (
               <button
                 key={index}
                 onClick={() => navigate(emotion.route)}
-                className="flex flex-col items-center justify-center p-8 md:p-12 bg-white/10 rounded-xl shadow-lg hover:scale-105 transition text-xl text-white border border-white/20 hover:bg-white/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-white/50 animate-pulse-glow"
+                className="flex flex-col items-center justify-center 
+                  p-6 sm:p-8 md:p-12 
+                  bg-white/10 rounded-xl shadow-lg 
+                  hover:scale-105 transition 
+                  text-base sm:text-lg md:text-xl text-white 
+                  border border-white/20 
+                  hover:bg-white/20 
+                  backdrop-blur-sm 
+                  focus:outline-none focus:ring-2 focus:ring-white/50 
+                  animate-pulse-glow"
               >
-                <span className="text-4xl md:text-6xl block mb-3">{emotion.emoji}</span>
+                <span className="text-3xl sm:text-4xl md:text-6xl block mb-2 sm:mb-3">
+                  {emotion.emoji}
+                </span>
                 {emotion.label}
               </button>
             ))}
@@ -44,7 +56,7 @@ const App = () => {
       </div>
     </div>
   );
-}
+};
 
 const Sparkles = ({ count = 200 }) => {
   const sparkles = useMemo(() => {
@@ -69,19 +81,19 @@ const DreamyBackground = () => {
       <div className="absolute inset-0 filter blur-3xl brightness-75">
         <div
           className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-pink-500/50 rounded-full"
-          style={{ animation: 'float 25s ease-in-out infinite' }}
+          style={{ animation: "float 25s ease-in-out infinite" }}
         />
         <div
           className="absolute top-1/4 right-0 w-1/3 h-1/3 bg-purple-600/50 rounded-full"
-          style={{ animation: 'float 20s ease-in-out infinite reverse' }}
+          style={{ animation: "float 20s ease-in-out infinite reverse" }}
         />
         <div
           className="absolute bottom-0 left-1/4 w-1/4 h-1/4 bg-blue-500/40 rounded-full"
-          style={{ animation: 'float 30s ease-in-out infinite', animationDelay: '5s' }}
+          style={{ animation: "float 30s ease-in-out infinite", animationDelay: "5s" }}
         />
         <div
           className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-teal-500/30 rounded-full"
-          style={{ animation: 'float 22s ease-in-out infinite', animationDelay: '10s' }}
+          style={{ animation: "float 22s ease-in-out infinite", animationDelay: "10s" }}
         />
       </div>
 

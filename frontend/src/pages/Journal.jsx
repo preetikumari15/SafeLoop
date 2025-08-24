@@ -67,7 +67,7 @@ const Journal = () => {
         <div className="relative z-10 bg-white/80 backdrop-blur-sm shadow-2xl shadow-green-200/50 rounded-3xl p-8 sm:p-12 w-full max-w-4xl transition-all duration-300">
           <div className="flex items-center justify-center gap-4 mb-8">
             <FaFeatherAlt className="text-6xl text-green-600" />
-            <h1 className="text-5xl font-bold text-gray-800 text-center">
+            <h1 className="text-5xl sm:text-2xl font-bold text-gray-800 text-center">
               Your Private Journal
             </h1>
           </div>

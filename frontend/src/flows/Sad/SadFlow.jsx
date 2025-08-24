@@ -59,11 +59,11 @@ const SadFlow = () => {
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 text-center">
         <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-12 max-w-4xl">
-          <h1 className="text-7xl font-bold text-white text-shadow-lg mb-8">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white text-shadow-lg mb-8">
             Hey there 💜
           </h1>
 
-          <p className="text-2xl text-slate-300 text-shadow leading-relaxed mb-12">
+          <p className="text-lg sm:text-xl lg:text-2xl text-slate-300 text-shadow leading-relaxed mb-12">
             I just wanted to remind you that you don't have to go through this alone.
             It's okay to feel what you're feeling, and you don't have to hide it or explain it away.
             <br /><br />
