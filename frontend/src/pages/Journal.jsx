@@ -3,11 +3,27 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FaFeatherAlt, FaSpinner, FaCheckCircle } from "react-icons/fa";
 
+const getWordCount = (text) => {
+  return text.trim() ? text.trim().split(/\s+/).length : 0;
+};
+
 const Journal = () => {
   const [entry, setEntry] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const wordCount = getWordCount(entry);
+  const WORD_LIMIT = 5000;
+
+  const handleTextChange = (e) => {
+    const newText = e.target.value;
+    const newWordCount = getWordCount(newText);
+    
+    if (newWordCount <= WORD_LIMIT) {
+      setEntry(newText);
+    }
+  };
 
   const handleSubmit = async () => {
     if (entry.trim() === "" || loading) return;
@@ -82,15 +98,25 @@ const Journal = () => {
             className="w-full p-6 bg-white border-2 border-green-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/30 transition-shadow duration-300 text-gray-700 leading-relaxed text-base"
             placeholder="What's on your mind today?"
             value={entry}
-            onChange={(e) => setEntry(e.target.value)}
+            onChange={handleTextChange}
             disabled={loading}
           />
+          <div className="mt-2 flex justify-between items-center text-sm">
+            <span className={`${wordCount >= WORD_LIMIT ? 'text-red-600' : 'text-gray-600'}`}>
+              {wordCount} / {WORD_LIMIT} words
+            </span>
+            {wordCount >= WORD_LIMIT && (
+              <span className="text-red-600">
+                Word limit reached
+              </span>
+            )}
+          </div>
         </div>
         
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
-          <button
+         <button
             onClick={handleSubmit}
-            disabled={loading || entry.trim() === ""}
+            disabled={loading || entry.trim() === "" || wordCount > WORD_LIMIT}
             className="w-full sm:w-auto flex items-center justify-center gap-3 bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-all duration-300 text-xl font-semibold disabled:bg-gray-400 disabled:cursor-not-allowed transform hover:scale-105"
           >
             {loading ? (
