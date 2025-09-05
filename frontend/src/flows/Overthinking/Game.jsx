@@ -22,7 +22,9 @@ const Game = ({ onComplete }) => {
   const [step, setStep] = useState(1);
   const [renamedItems, setRenamedItems] = useState(["", "", "", "", ""]);
   const [memories, setMemories] = useState(["", "", ""]);
-  const [countingDone, setCountingDone] = useState(false);
+  const [countdown, setCountdown] = useState(false);
+  const [isCountingActive, setIsCountingActive] = useState(false);
+  const [colors, setColors] = useState(["", "", ""]);
   const [touchDescription, setTouchDescription] = useState("");
 
   const handleRenameChange = (value, index) => {
@@ -37,14 +39,15 @@ const Game = ({ onComplete }) => {
     setMemories(newMemories);
   };
 
-    const doCountGame = () => {
+  const doCountGame = () => {
+    setIsCountingActive(true);
     let output = [];
-    for (let i = 20; i >= 1; i--) {
+    for (let i = 10; i >= 1; i--) {
       let line = i % 2 === 0 ? `🤫 Whisper: ${i}` : `🔊 Loud: ${i}`;
       if (i % 3 === 0) line += " 👏 Clap!";
       output.push(line);
     }
-    alert(output.join("\n"));
+    setCountdown(output);
     setCountingDone(true);
   };
 
@@ -117,31 +120,49 @@ const Game = ({ onComplete }) => {
               <div className="animate-fadeIn">
                 <h2 className="text-6xl font-bold text-white text-shadow-lg mb-6">🎵 Count & Breathe</h2>
                 <p className="text-2xl text-slate-300 text-shadow mb-8">
-                  Count backwards from 20 with a twist.
+                  Count backwards from 10 with a twist.
                 </p>
-                <button
-                  onClick={doCountGame}
-                  className="w-full sm:w-auto px-10 py-4 bg-purple-900/50 backdrop-blur-sm rounded-xl
-                    border border-purple-500/30 text-white hover:bg-purple-500/60 
-                    transition-all duration-300 text-xl font-medium
-                    hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-                >
-                  Start Counting 🔢
-                </button>
-                {countingDone && (
-                  <div className="mt-8 animate-fadeIn">
-                    <p className="text-green-400 mb-4">Great job! 🌟</p>
-                    <button
-                      onClick={nextStep}
-                      className="w-full sm:w-auto px-10 py-4 bg-green-900/50 backdrop-blur-sm rounded-xl
-                        border border-green-500/30 text-white hover:bg-green-500/60 
-                        transition-all duration-300 text-xl font-medium
-                        hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500/50"
-                    >
-                      Continue ✨
-                    </button>
+                {!isCountingActive ? (
+                  <button
+                    onClick={doCountGame}
+                    className="w-full sm:w-auto px-10 py-4 bg-purple-900/50 backdrop-blur-sm rounded-xl
+                      border border-purple-500/30 text-white hover:bg-purple-500/60 
+                      transition-all duration-300 text-xl font-medium
+                      hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                  >
+                    Start Counting 🔢
+                  </button>
+                ) : (
+                <div className="space-y-4">
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6">
+                    <div className="space-y-3">
+                      {countdown.map((line, index) => (
+                        <div
+                          key={index}
+                          className="text-2xl text-white animate-fadeIn"
+                          style={{ animationDelay: `${index * 0.1}s` }}
+                        >
+                          {line}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                )}
+          {countdown && (
+            <div className="mt-8 animate-fadeIn">
+              <p className="text-green-400 mb-4">Great job! 🌟</p>
+              <button
+                onClick={nextStep}
+                className="w-full sm:w-auto px-10 py-4 bg-green-900/50 backdrop-blur-sm rounded-xl
+                  border border-green-500/30 text-white hover:bg-green-500/60 
+                  transition-all duration-300 text-xl font-medium
+                  hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500/50"
+              >
+                Continue ✨
+              </button>
+            </div>
+          )}
+              </div>
+            )}
               </div>
             </div>
           )}
@@ -190,8 +211,12 @@ const Game = ({ onComplete }) => {
                     <input
                       type="text"
                       placeholder={`Find color ${index + 1}`}
-                      value={memories[index]}
-                      onChange={(e) => handleMemoryChange(e.target.value, index)}
+                      value={colors[index]}
+                      onChange={(e) => {
+                        const newColors = [...colors];
+                        newColors[index] = e.target.value;
+                        setColors(newColors);
+                      }}
                       className="w-full p-4 bg-white/10 border border-white/10 rounded-xl 
                         text-white placeholder-white/70 focus:outline-none focus:border-purple-500/50
                         text-lg"
@@ -204,7 +229,7 @@ const Game = ({ onComplete }) => {
               </div>
               <button
                 onClick={nextStep}
-                disabled={memories.some(memory => memory.trim() === "")}
+                disabled={colors.some(color => color.trim() === "")}
                 className="w-full sm:w-auto px-10 py-4 bg-purple-900/50 backdrop-blur-sm rounded-xl
                   border border-purple-500/30 text-white hover:bg-purple-500/60 
                   transition-all duration-300 text-xl font-medium disabled:opacity-50
@@ -214,7 +239,7 @@ const Game = ({ onComplete }) => {
               </button>
             </div>
           )}
-
+          
           {step === 6 && (
             <div className="space-y-8 text-center animate-fadeIn">
               <h2 className="text-6xl font-bold text-white text-shadow-lg mb-6">
