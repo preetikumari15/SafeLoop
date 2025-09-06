@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { CardContainer, CardBody, CardItem } from "./components/ui/3d-card";
 
 const App = () => {
   const navigate = useNavigate();
@@ -20,38 +21,51 @@ const App = () => {
         <Navbar />
 
         <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 text-center pt-24">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white text-shadow-lg leading-snug">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white text-shadow-lg leading-snug mt-12">
             Hey! What happened?
           </h1>
-          <h2 className="text-lg sm:text-xl md:text-3xl font-bold mb-6 sm:mb-8 md:mb-10 text-slate-300 text-shadow leading-relaxed">
+          <h2 className="text-lg sm:text-xl md:text-3xl font-bold mb-4 sm:mb-6 md:mb-8 text-slate-300 text-shadow leading-relaxed">
             Tell me, how are you feeling?
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full max-w-3xl">
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-8xl">
             {emotions.map((emotion, index) => (
-              <button
+              <CardContainer
                 key={index}
+                className="inter-var"
                 onClick={() => navigate(emotion.route)}
-                className="flex flex-col items-center justify-center 
-                  p-6 sm:p-8 md:p-12 
-                  bg-white/10 rounded-xl shadow-lg 
-                  hover:scale-105 transition 
-                  text-base sm:text-lg md:text-xl text-white 
-                  border border-white/20 
-                  hover:bg-white/20 
-                  backdrop-blur-sm 
-                  focus:outline-none focus:ring-2 focus:ring-white/50 
-                  animate-pulse-glow"
               >
-                <span className="text-3xl sm:text-4xl md:text-6xl block mb-2 sm:mb-3">
-                  {emotion.emoji}
-                </span>
-                {emotion.label}
-              </button>
+             
+                <CardBody
+                  className="
+                    flex flex-col items-center justify-center p-4
+                    h-full min-h-[320px]
+                    bg-white/10 rounded-xl shadow-lg 
+                    text-white 
+                    border border-white/20 
+                    backdrop-blur-sm 
+                    transition-all duration-300
+                    hover:scale-105 hover:bg-white/20 hover:border-black 
+                    focus:outline-none focus:ring-2 focus:ring-white/50 
+                    animate-pulse-glow"
+                >
+                  <CardItem
+                    translateZ="80"
+                    className="text-6xl sm:text-7xl"
+                  >
+                    {emotion.emoji}
+                  </CardItem>
+                  <CardItem
+                    translateZ="80"
+                    className="text-2xl font-semibold text-neutral-200 mt-6"
+                  >
+                    {emotion.label}
+                  </CardItem>
+                </CardBody>
+              </CardContainer>
             ))}
           </div>
         </main>
-
         <Footer />
       </div>
     </div>
@@ -96,7 +110,6 @@ const DreamyBackground = () => {
           style={{ animation: "float 22s ease-in-out infinite", animationDelay: "10s" }}
         />
       </div>
-
       <style jsx global>{`
         @keyframes float {
           0% { transform: translateY(0px) translateX(0px); }
