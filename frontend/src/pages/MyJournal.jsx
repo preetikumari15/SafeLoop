@@ -76,54 +76,61 @@ const MyJournal = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-red-300 to-indigo-300 px-4 py-20">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-5xl font-semibold text-black mb-10 text-center">
-          📚 Your Journal Entries
-        </h1>
-        <div className="flex justify-center mb-8">
-          <Link 
-            to="/journal"
-            className="bg-green-500 text-white px-8 py-4 rounded-xl hover:bg-green-600
-              transition-colors duration-300 flex items-center gap-2 text-lg font-medium
-              shadow-lg hover:shadow-xl"
-          >
-            ✏️ Write New Entry
-          </Link>
+return (
+  <div className="min-h-screen bg-gradient-to-br from-red-300 to-indigo-300 px-4 py-8 sm:py-20">
+    <div className="max-w-5xl mx-auto">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black mb-6 sm:mb-10 text-center">
+        📚 Your Journal Entries
+      </h1>
+      
+      <div className="flex justify-center mb-6 sm:mb-8">
+        <Link 
+          to="/journal"
+          className="w-full sm:w-auto bg-green-500 text-white px-6 sm:px-8 py-3 sm:py-4 
+            rounded-xl hover:bg-green-600 transition-colors duration-300 
+            flex items-center justify-center gap-2 text-base sm:text-lg font-medium
+            shadow-lg hover:shadow-xl"
+        >
+          ✏️ Write New Entry
+        </Link>
+      </div>
+
+      {entries.length === 0 ? (
+        <div className="text-center text-gray-600 text-sm sm:text-base">
+          No journal entries yet. Start writing to see them here!
         </div>
-        {entries.length === 0 ? (
-          <div className="text-center text-gray-600">
-            No journal entries yet. Start writing to see them here!
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {entries.map((entry) => (
-              <div 
-                key={entry._id} 
-                className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01]"
-                onClick={() => toggleEntry(entry._id)}
-              >
-                <div className="p-6">
-                  <div className="flex justify-between items-start">
-                    <p className="text-gray-700 whitespace-pre-wrap">
-                      {expandedEntry === entry._id ? entry.entry : getPreviewText(entry.entry)}
-                    </p>
-                  </div>
-                  <div className="mt-4 text-sm text-gray-500 flex justify-between items-center">
-                    <span>{formatDate(entry.createdAt)}</span>
-                    <span className="text-blue-500">
-                      {expandedEntry === entry._id ? '▼ Show less' : '▶ Read more'}
-                    </span>
-                  </div>
+      ) : (
+        <div className="space-y-3 sm:space-y-4">
+          {entries.map((entry) => (
+            <div 
+              key={entry._id} 
+              className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer 
+                transition-all duration-300 hover:shadow-xl hover:scale-[1.01]"
+              onClick={() => toggleEntry(entry._id)}
+            >
+              <div className="p-4 sm:p-6">
+                <div className="flex justify-between items-start">
+                  <p className="text-sm sm:text-base text-gray-700 whitespace-pre-wrap">
+                    {expandedEntry === entry._id ? entry.entry : getPreviewText(entry.entry)}
+                  </p>
+                </div>
+                <div className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-500 
+                  flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2"
+                >
+                  <span className="text-gray-500">{formatDate(entry.createdAt)}</span>
+                  <span className="text-blue-500 inline-flex items-center">
+                    {expandedEntry === entry._id ? '▼ Show less' : '▶ Read more'}
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default MyJournal;
