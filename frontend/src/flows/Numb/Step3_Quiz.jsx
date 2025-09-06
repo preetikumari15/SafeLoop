@@ -123,8 +123,8 @@ export default function Step3_Quiz({ onNext }) {
             </p>
             <button
               onClick={onNext}
-              className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
-                       border border-white/20 text-white hover:bg-white/50
+              className="px-8 py-3 bg-green-500/20 backdrop-blur-sm rounded-xl
+                       border border-white/20 text-white hover:bg-green-600/50
                        transition-all duration-300 text-xl font-medium
                        hover:scale-105 focus:outline-none focus:ring-2
                        focus:ring-white/50"
