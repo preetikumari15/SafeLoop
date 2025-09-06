@@ -34,42 +34,42 @@ const Step3_DrinkWater = ({ next }) => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-slate-900 font-sans antialiased overflow-hidden">
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 via-slate-900 to-indigo-900/50" />
-        <WaterDrops />
-      </div>
+  <div className="relative min-h-screen bg-slate-900 font-sans antialiased overflow-hidden">
+    <div className="fixed inset-0 z-0">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 via-slate-900 to-indigo-900/50" />
+      <WaterDrops />
+    </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-12 text-center">
-        <div >
-          <div className="relative mb-8">
-            <span className="absolute inset-0 text-9xl animate-float filter blur-md opacity-50">
-              🥤
-            </span>
-            <span className="relative text-9xl animate-float">
-              🥤
-            </span>
-          </div>
-
-          <h1 className="text-7xl font-bold text-white text-shadow-xl mb-8">
-            Drink some water
-          </h1>
-          
-          <p className="text-3xl text-slate-300 text-shadow mb-10">
-            You're safe! This will pass too. 💙
-          </p>
-
-          <button
-            onClick={next}
-            className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
-              border border-white/20 text-white hover:bg-white/20 
-              transition-all duration-300 text-xl font-medium
-              hover:scale-105 focus:outline-none focus:ring-2 
-              focus:ring-white/50"
-          >
-            Continue ✨
-          </button>
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 md:p-12 text-center">
+      <div>
+        <div className="relative mb-6 sm:mb-8">
+          <span className="absolute inset-0 text-6xl sm:text-8xl md:text-9xl animate-float filter blur-md opacity-50">
+            🥤
+          </span>
+          <span className="relative text-6xl sm:text-8xl md:text-9xl animate-float">
+            🥤
+          </span>
         </div>
+
+        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white text-shadow-xl mb-4 sm:mb-6 md:mb-8">
+          Drink some water
+        </h1>
+        
+        <p className="text-lg sm:text-2xl md:text-3xl text-slate-300 text-shadow mb-6 sm:mb-8 md:mb-10">
+          You're safe! This will pass too. 💙
+        </p>
+
+        <button
+          onClick={next}
+          className="px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-xl
+            border border-white/20 text-white hover:bg-white/20 
+            transition-all duration-300 text-lg sm:text-xl font-medium
+            hover:scale-105 focus:outline-none focus:ring-2 
+            focus:ring-white/50"
+        >
+          Continue ✨
+        </button>
+      </div>
 
         <audio ref={audioRef} src="/rain.mp3" loop />
       </div>

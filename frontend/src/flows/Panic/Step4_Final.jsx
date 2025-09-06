@@ -40,98 +40,102 @@ const Step4_Final = () => {
     navigate('/journal');
   };
 
-  return (
-    <div className="relative min-h-screen bg-slate-900 font-sans antialiased overflow-hidden">
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/50 via-slate-900 to-purple-900/50" />
-        <FloatingStars />
-      </div>
+ return (
+  <div className="relative min-h-screen bg-slate-900 font-sans antialiased overflow-hidden">
+    <div className="fixed inset-0 z-0">
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/50 via-slate-900 to-purple-900/50" />
+      <FloatingStars />
+    </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-12 text-center">
-        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-12 max-w-3xl">
-          <h1 className="text-7xl font-bold text-white text-shadow-lg mb-10">
-            You're doing great 💙
-          </h1>
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 md:p-12 text-center">
+      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl 
+        p-6 sm:p-8 md:p-12 w-full max-w-sm sm:max-w-lg md:max-w-3xl">
+        
+        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white text-shadow-lg mb-6 sm:mb-8 md:mb-10">
+          You're doing great 💙
+        </h1>
 
-          <p className="text-2xl text-slate-300 text-shadow mb-12">
-            Are you feeling better now?
-          </p>
+        <p className="text-lg sm:text-xl md:text-2xl text-slate-300 text-shadow mb-6 sm:mb-8 md:mb-12">
+          Are you feeling better now?
+        </p>
 
-          <div className="flex justify-center gap-6 mb-12">
-            <button
-              onClick={() => {
-                setShowYesOptions(true);
-                setShowNoOptions(false);
-              }}
-              className="px-8 py-3 bg-green-500/20 backdrop-blur-sm rounded-xl
-                border border-green-500/30 text-white hover:bg-green-300/70 
-                transition-all duration-300 text-xl font-medium
-                hover:scale-105 focus:outline-none focus:ring-2 
-                focus:ring-green-500/50"
-            >
-              Yes ✨
-            </button>
-            <button
-              onClick={() => {
-                setShowNoOptions(true);
-                setShowYesOptions(false);
-              }}
-              className="px-8 py-3 bg-pink-500/20 backdrop-blur-sm rounded-xl
-                border border-pink-500/30 text-white hover:bg-pink-300/80 
-                transition-all duration-300 text-xl font-medium
-                hover:scale-105 focus:outline-none focus:ring-2 
-                focus:ring-pink-500/50"
-            >
-              Not Yet 🌸
-            </button>
-          </div>
+        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-6 sm:mb-8 md:mb-12">
+          <button
+            onClick={() => {
+              setShowYesOptions(true);
+              setShowNoOptions(false);
+            }}
+            className="px-6 sm:px-8 py-2 sm:py-3 bg-green-500/20 backdrop-blur-sm rounded-xl
+              border border-green-500/30 text-white hover:bg-green-300/70 
+              transition-all duration-300 text-lg sm:text-xl font-medium
+              hover:scale-105 focus:outline-none focus:ring-2 
+              focus:ring-green-500/50"
+          >
+            Yes ✨
+          </button>
 
-          {showYesOptions && (
-            <div className="flex flex-col gap-6 animate-fade-in">
-              <button
-                onClick={handleWriteClick}
-                className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
-                  border border-white/20 text-white hover:bg-white/40 
-                  transition-all duration-300 text-lg font-medium"
-              >
-                Wanna write something 📝
-              </button>
-
-              <Link
-                to="/"
-                className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
-                  border border-white/20 text-white hover:bg-white/40 
-                  transition-all duration-300 text-lg font-medium"
-              >
-                Back to Home 🏠
-              </Link>
-            </div>
-          )}
-
-          {showNoOptions && (
-            <div className="flex flex-col gap-6 animate-fade-in">
-              <Link
-                to={`https://wa.me/${localStorage.getItem("emergencyContact")}`}
-                className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
-                  border border-white/20 text-white hover:bg-white/40 
-                  transition-all duration-300 text-lg font-medium"
-              >
-                Talk to Someone 💬
-              </Link>
-
-              <a
-                href="tel:18001234567"
-                className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
-                  border border-white/20 text-white hover:bg-white/40 
-                  transition-all duration-300 text-lg font-medium"
-              >
-                Call Helpline ☎️
-              </a>
-            </div>
-          )}
+          <button
+            onClick={() => {
+              setShowNoOptions(true);
+              setShowYesOptions(false);
+            }}
+            className="px-6 sm:px-8 py-2 sm:py-3 bg-pink-500/20 backdrop-blur-sm rounded-xl
+              border border-pink-500/30 text-white hover:bg-pink-300/80 
+              transition-all duration-300 text-lg sm:text-xl font-medium
+              hover:scale-105 focus:outline-none focus:ring-2 
+              focus:ring-pink-500/50"
+          >
+            Not Yet 🌸
+          </button>
         </div>
-         <audio ref={audioRef} src="/rain.mp3" loop />
+
+        {showYesOptions && (
+          <div className="flex flex-col gap-4 sm:gap-6 animate-fade-in">
+            <button
+              onClick={handleWriteClick}
+              className="px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-xl
+                border border-white/20 text-white hover:bg-white/40 
+                transition-all duration-300 text-base sm:text-lg font-medium"
+            >
+              Wanna write something 📝
+            </button>
+
+            <Link
+              to="/"
+              className="px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-xl
+                border border-white/20 text-white hover:bg-white/40 
+                transition-all duration-300 text-base sm:text-lg font-medium"
+            >
+              Back to Home 🏠
+            </Link>
+          </div>
+        )}
+
+        {showNoOptions && (
+          <div className="flex flex-col gap-4 sm:gap-6 animate-fade-in">
+            <Link
+              to={`https://wa.me/${localStorage.getItem("emergencyContact")}`}
+              className="px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-xl
+                border border-white/20 text-white hover:bg-white/40 
+                transition-all duration-300 text-base sm:text-lg font-medium"
+            >
+              Talk to Someone 💬
+            </Link>
+
+            <a
+              href="tel:18001234567"
+              className="px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-xl
+                border border-white/20 text-white hover:bg-white/40 
+                transition-all duration-300 text-base sm:text-lg font-medium"
+            >
+              Call Helpline ☎️
+            </a>
+          </div>
+        )}
       </div>
+
+      <audio ref={audioRef} src="/rain.mp3" loop />
+    </div>
 
       <style jsx>{`
         @keyframes twinkle {

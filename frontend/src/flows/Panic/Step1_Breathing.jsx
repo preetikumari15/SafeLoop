@@ -104,56 +104,55 @@ const Step1_Breathing = ({ next }) => {
 
     return (
     <div className="relative min-h-screen bg-slate-900 font-sans antialiased">
-     
-      <div className="fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-slate-900 to-indigo-900/50" />
-        <SparklingHearts count={30} />
-      </div>
+    
+    <div className="fixed inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-slate-900 to-indigo-900/50" />
+      <SparklingHearts count={30} />
+    </div>
 
-      
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 text-center">
-        <h2 className="text-8xl font-bold mb-12 text-white text-shadow-lg">
-          Let's Breathe Together
-        </h2>
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 text-center">
+      <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 sm:mb-12 text-white text-shadow-lg">
+        Let's Breathe Together
+      </h2>
 
-       
-        <div className="relative w-40 h-40 mb-10">
-          <div 
-            className={`absolute inset-0 flex items-center justify-center text-8xl
-              ${phase === "Inhale" ? "animate-heart-expand" : 
-                phase === "Exhale" ? "animate-heart-contract" : 
-                "animate-heart-pulse"}`}
-          >
-            <div className="relative">
-              <span className="absolute inset-0 text-pink-500/50 animate-glow filter blur-md">❤️</span>
-              <span className="relative text-pink-500">❤️</span>
-            </div>
+      <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 mb-6 sm:mb-10">
+        <div 
+          className={`absolute inset-0 flex items-center justify-center text-4xl sm:text-6xl md:text-8xl
+            ${phase === "Inhale" ? "animate-heart-expand" : 
+              phase === "Exhale" ? "animate-heart-contract" : 
+              "animate-heart-pulse"}`}
+        >
+          <div className="relative">
+            <span className="absolute inset-0 text-pink-500/50 animate-glow filter blur-md">❤️</span>
+            <span className="relative text-pink-500">❤️</span>
           </div>
         </div>
-
-        <p className="mb-8 text-5xl font-medium text-slate-300 text-shadow">
-          {phase}
-          {countdown > 0 && (
-            <span className="ml-4 font-bold text-white">
-              {countdown}
-            </span>
-          )}
-        </p>
-        <audio ref={audioRef} src="/breathing.mp3" loop />
-
-        {!isCompleted && (
-          <button
-            onClick={next}
-            className="mt-8 px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
-              border border-white/20 text-white hover:bg-white/20 
-              transition-all duration-300 text-xl font-medium
-              hover:scale-105 focus:outline-none focus:ring-2 
-              focus:ring-white/50"
-          >
-            Continue →
-          </button>
-        )}
       </div>
+
+      <p className="mb-6 sm:mb-8 text-2xl sm:text-4xl md:text-5xl font-medium text-slate-300 text-shadow">
+        {phase}
+        {countdown > 0 && (
+          <span className="ml-2 sm:ml-4 font-bold text-white text-xl sm:text-2xl md:text-3xl">
+            {countdown}
+          </span>
+        )}
+      </p>
+
+      <audio ref={audioRef} src="/breathing.mp3" loop />
+
+      {!isCompleted && (
+        <button
+          onClick={next}
+          className="mt-4 sm:mt-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-xl
+            border border-white/20 text-white hover:bg-white/20 
+            transition-all duration-300 text-lg sm:text-xl font-medium
+            hover:scale-105 focus:outline-none focus:ring-2 
+            focus:ring-white/50"
+        >
+          Continue →
+        </button>
+      )}
+    </div>
 
       
       <style jsx>{`
