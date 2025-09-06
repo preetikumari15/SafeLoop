@@ -29,44 +29,46 @@ const App = () => {
         </h2>
 
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-4 w-full max-w-8xl ">
-          {emotions.map((emotion, index) => (
-            <div
-              key={index}
-              className="cursor-pointer"
-              onClick={() => navigate(emotion.route)}
-            >
-              <CardContainer className="h-full">
-                <CardBody
-                  className="
-                    flex flex-col items-center justify-center p-6
-                    h-full min-h-[280px] sm:min-h-[260px] md:min-h-[300px] 
-                    bg-white/10 rounded-xl shadow-lg 
-                    text-white 
-                    border border-white/20 
-                    backdrop-blur-sm 
-                    transition-all duration-300
-                    hover:scale-105 hover:bg-white/20 hover:border-black 
-                    focus:outline-none focus:ring-2 focus:ring-white/50 
-                    animate-pulse-glow
-                  "
-                >
-                  <CardItem
-                    translateZ="80"
-                    className="text-4xl sm:text-5xl md:text-6xl"
+       <div className="w-full max-w-8xl mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {emotions.map((emotion, index) => (
+              <div
+                key={index}
+                className="cursor-pointer h-full"
+                onClick={() => navigate(emotion.route)}
+              >
+                <CardContainer className="h-full">
+                  <CardBody
+                    className="
+                      flex flex-col items-center justify-center p-6
+                      h-full min-h-[260px] md:min-h-[300px]
+                      bg-white/10 rounded-xl shadow-lg
+                      text-white
+                      border border-white/20
+                      backdrop-blur-sm
+                      transition-all duration-300
+                      hover:scale-105 hover:bg-white/20 hover:border-black
+                      focus:outline-none focus:ring-2 focus:ring-white/50
+                      animate-pulse-glow
+                    "
                   >
-                    {emotion.emoji}
-                  </CardItem>
-                  <CardItem
-                    translateZ="80"
-                    className="text-lg sm:text-xl md:text-2xl font-semibold text-neutral-200 mt-3 sm:mt-4 md:mt-6"
-                  >
-                    {emotion.label}
-                  </CardItem>
-                </CardBody>
-              </CardContainer>
-            </div>
-          ))}
+                    <CardItem
+                      translateZ="80"
+                      className="text-4xl sm:text-5xl md:text-6xl"
+                    >
+                      {emotion.emoji}
+                    </CardItem>
+                    <CardItem
+                      translateZ="80"
+                      className="text-lg sm:text-xl md:text-2xl font-semibold text-neutral-200 mt-4 md:mt-6"
+                    >
+                      {emotion.label}
+                    </CardItem>
+                  </CardBody>
+                </CardContainer>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
 
