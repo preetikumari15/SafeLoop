@@ -30,7 +30,7 @@ const App = () => {
 
 
        <div className="w-full max-w-8xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-6">
             {emotions.map((emotion, index) => (
               <div
                 key={index}
