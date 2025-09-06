@@ -53,13 +53,13 @@ const App = () => {
                     "
                   >
                     <CardItem
-                      translateZ="80"
+                      translateZ="60"
                       className="text-4xl sm:text-5xl md:text-6xl"
                     >
                       {emotion.emoji}
                     </CardItem>
                     <CardItem
-                      translateZ="80"
+                      translateZ="40"
                       className="text-lg sm:text-xl md:text-2xl font-semibold text-neutral-200 mt-4 md:mt-6"
                     >
                       {emotion.label}
