@@ -36,7 +36,7 @@ const App = () => {
               className="cursor-pointer"
               onClick={() => navigate(emotion.route)}
             >
-              <CardContainer className="inter-var h-full">
+              <CardContainer className="h-full">
                 <CardBody
                   className="
                     flex flex-col items-center justify-center p-6
