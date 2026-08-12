@@ -23,14 +23,20 @@ app.use('/api/journal', journalRoutes);
 
 // MongoDB connection
 const uri = process.env.MONGODB_URI;
+
 mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+    serverSelectionTimeoutMS: 10000,
+    family: 4
+})
+.then(() => {
+    console.log("MongoDB database connection established successfully");
+})
+.catch((error) => {
+    console.error("MongoDB connection failed:", error);
 });
 
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("MongoDB database connection established successfully");
+mongoose.connection.on("error", (error) => {
+    console.error("MongoDB error:", error);
 });
 
 // Routes
