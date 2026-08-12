@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { CardContainer, CardBody, CardItem } from "./components/ui/3d-card";
 
 const App = () => {
   const navigate = useNavigate();
@@ -12,49 +13,67 @@ const App = () => {
     { emoji: "💭", label: "Overthinking", route: "/flow/overthinking" },
   ];
 
-  return (
-    <div className="relative min-h-screen bg-slate-900 font-sans antialiased">
-      <DreamyBackground />
+ return (
+  <div className="relative min-h-screen bg-slate-900 font-sans antialiased">
+    <DreamyBackground />
 
-      <div className="relative z-10 flex flex-col min-h-screen">
-        <Navbar />
+    <div className="relative z-10 flex flex-col min-h-screen">
+      <Navbar />
 
-        <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 text-center pt-24">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white text-shadow-lg leading-snug">
-            Hey! What happened?
-          </h1>
-          <h2 className="text-lg sm:text-xl md:text-3xl font-bold mb-6 sm:mb-8 md:mb-10 text-slate-300 text-shadow leading-relaxed">
-            Tell me, how are you feeling?
-          </h2>
+      <main className="flex-grow flex flex-col items-center justify-center p-4 text-center">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 text-white text-shadow-lg leading-snug mt-16 sm:mt-24">
+          Hey! What happened?
+        </h1>
+        <h2 className="text-lg sm:text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-slate-300 text-shadow leading-relaxed">
+          Tell me, how are you feeling?
+        </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-10 w-full max-w-3xl">
-            {emotions.map((emotion, index) => (
-              <button
-                key={index}
-                onClick={() => navigate(emotion.route)}
-                className="flex flex-col items-center justify-center 
-                  p-6 sm:p-8 md:p-12 
-                  bg-white/10 rounded-xl shadow-lg 
-                  hover:scale-105 transition 
-                  text-base sm:text-lg md:text-xl text-white 
-                  border border-white/20 
-                  hover:bg-white/20 
-                  backdrop-blur-sm 
-                  focus:outline-none focus:ring-2 focus:ring-white/50 
-                  animate-pulse-glow"
-              >
-                <span className="text-3xl sm:text-4xl md:text-6xl block mb-2 sm:mb-3">
-                  {emotion.emoji}
-                </span>
-                {emotion.label}
-              </button>
-            ))}
-          </div>
-        </main>
 
-        <Footer />
+      <div className="w-full max-w-4xl mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {emotions.map((emotion, index) => (
+            <div
+              key={index}
+              className="cursor-pointer"
+              onClick={() => navigate(emotion.route)}
+            >
+              <div className="overflow-hidden rounded-2xl">
+                <CardContainer className="h-full">
+                  <CardBody
+                    className="
+                      flex flex-col items-center justify-center p-6
+                      h-full min-h-[280px]  
+                      bg-white/10 rounded-2xl shadow-lg
+                      text-white border border-white/20 backdrop-blur-sm
+                      transition-transform duration-300
+                      hover:scale-105 hover:bg-white/20 hover:border-white
+                      focus:outline-none focus:ring-2 focus:ring-white/50 animate-pulse-glow
+                    "
+                  >
+                    <CardItem translateZ="80" className="text-5xl md:text-6xl">
+                      {emotion.emoji}
+                    </CardItem>
+                    <CardItem
+                      translateZ="60"
+                      className="text-xl sm:text-2xl font-semibold text-neutral-200 mt-4"
+                    >
+                      {emotion.label}
+                    </CardItem>
+                  </CardBody>
+                </CardContainer>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
+
+
+      </main>
+
+      <Footer />
     </div>
+  </div>
+
   );
 };
 
@@ -96,7 +115,6 @@ const DreamyBackground = () => {
           style={{ animation: "float 22s ease-in-out infinite", animationDelay: "10s" }}
         />
       </div>
-
       <style jsx global>{`
         @keyframes float {
           0% { transform: translateY(0px) translateX(0px); }

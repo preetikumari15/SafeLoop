@@ -53,51 +53,56 @@ const Step2_Grounding = ({ next }) => {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-900 font-sans antialiased overflow-hidden">
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/50 via-slate-900 to-purple-900/50" />
-        <FloatingStars />
+  <div className="relative min-h-screen bg-slate-900 font-sans antialiased overflow-hidden">
+    <div className="fixed inset-0 z-0">
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/50 via-slate-900 to-purple-900/50" />
+      <FloatingStars />
+    </div>
+
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 sm:p-8 text-center">
+      <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-3 sm:mb-5 text-white text-shadow-lg">
+        Ground Yourself 🌿
+      </h2>
+      <h3 className="text-2xl sm:text-4xl md:text-5xl font-medium mb-6 sm:mb-8 text-slate-300 text-shadow">
+        I'm here with you!
+      </h3>
+
+      <div className="mb-6 sm:mb-8 text-slate-400 text-lg sm:text-xl">
+        Step {index + 1} of {prompts.length}
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 text-center">
-        <h2 className="text-8xl font-bold mb-5 text-white text-shadow-lg">
-          Ground Yourself 🌿
-        </h2>
-        <h3 className="text-5xl font-medium mb-8 text-slate-300 text-shadow">
-          I'm here with you!
-        </h3>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -20, scale: 0.95 }}
+          transition={{ duration: 0.4 }}
+          className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl 
+            p-6 sm:p-8 md:p-12 w-full max-w-xs sm:max-w-md md:max-w-lg mb-6 sm:mb-8"
+        >
+          <div className="text-4xl sm:text-6xl md:text-7xl mb-4 sm:mb-6 animate-float">
+            {prompts[index].icon}
+          </div>
+          <p className="text-xl sm:text-2xl md:text-3xl text-slate-300">
+            {prompts[index].text}
+          </p>
+        </motion.div>
+      </AnimatePresence>
 
-        <div className="mb-8 text-slate-400">
-          Step {index + 1} of {prompts.length}
-        </div>
+      <button
+        onClick={handleNext}
+        className="px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-sm rounded-xl
+          border border-white/20 text-white hover:bg-white/20 
+          transition-all duration-300 text-lg sm:text-xl font-medium
+          hover:scale-105 focus:outline-none focus:ring-2 
+          focus:ring-white/50"
+      >
+        {index === prompts.length - 1 ? "Finish Grounding ✨" : "Done ✅"}
+      </button>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.4 }}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-12 w-full max-w-lg mb-8"
-          >
-            <div className="text-7xl mb-6 animate-float">{prompts[index].icon}</div>
-            <p className="text-3xl text-slate-300">{prompts[index].text}</p>
-          </motion.div>
-        </AnimatePresence>
-
-        <button
-          onClick={handleNext}
-          className="px-8 py-3 bg-white/10 backdrop-blur-sm rounded-xl
-            border border-white/20 text-white hover:bg-white/20 
-            transition-all duration-300 text-xl font-medium
-            hover:scale-105 focus:outline-none focus:ring-2 
-            focus:ring-white/50"
-         >
-          {index === prompts.length - 1 ? "Finish Grounding ✨" : "Done ✅"}
-        </button>
-
-        <audio ref={audioRef} src="/rain.mp3" loop />
-      </div>
+      <audio ref={audioRef} src="/rain.mp3" loop />
+    </div>
 
       <style jsx>{`
         @keyframes float {
