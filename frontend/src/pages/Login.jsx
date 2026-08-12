@@ -5,21 +5,35 @@ import axios from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      const res = await axios.post("https://safeloop-o0pc.onrender.com/api/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://safeloop-o0pc.onrender.com/api/login",
+        {
+          email,
+          password,
+        }
+      );
 
       localStorage.setItem("token", res.data.token);
 
-      navigate("/"); 
+      navigate("/");
     } catch (err) {
-      alert(err.response.data.message || "Login failed");
+      console.error("Login error:", err);
+
+      alert(
+        err.response?.data?.message ||
+        "Unable to connect to server. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,9 +62,10 @@ const Login = () => {
         />
         <button
           type="submit"
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+          disabled={loading}
+          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
         <p className="text-md text-center mt-4">
           Don't have an account?{" "}
