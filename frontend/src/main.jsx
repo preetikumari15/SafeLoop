@@ -17,7 +17,7 @@ import Chatbot from "./components/Chatbot";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Navbar />
-    {localStorage.getItem("token") && <Chatbot />}
+    {isLoggedIn && <Chatbot />}
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/flow/:emotion" element={<FlowPage /> } />
