@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const Login = () => {
       );
 
       localStorage.setItem("token", res.data.token);
-      window.dispatchEvent(new Event("authChange"));
+      setIsLoggedIn(true);
 
       navigate("/");
     } catch (err) {

@@ -1,22 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem("token");
-      setIsLoggedIn(!!token);
-    };
-    checkAuth();
-    // Listen for login/logout
-    window.addEventListener("authChange", checkAuth);
-    return () => {
-      window.removeEventListener("authChange", checkAuth);
-    };
-  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -24,8 +10,6 @@ const Navbar = () => {
     localStorage.removeItem("emergencyContact");
 
     setIsLoggedIn(false);
-
-    window.dispatchEvent(new Event("authChange"));
 
     window.location.href = "/";
   };

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import PanicFlow from "../flows/Panic/PanicFlow";
 import SadFlow from "../flows/Sad/SadFlow";
 import NumbFlow from "../flows/Numb/NumbFlow";
+import OverthinkingFlow from "../flows/Overthinking/OverthinkFlow";
 
 const FlowPage = () => {
   const { emotion } = useParams();
@@ -14,8 +15,8 @@ const FlowPage = () => {
       return <SadFlow />;
     case "numb":
       return <NumbFlow />;
-    case "angry":
-      return <AngerFlow />;
+    case "overthinking":
+      return <OverthinkingFlow />;
     default:
       return <div className="text-center mt-10 text-xl">No flow defined for this emotion.</div>;
   }
