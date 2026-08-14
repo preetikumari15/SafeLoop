@@ -76,38 +76,36 @@ const Navbar = () => {
           )}
 
           {/* Hamburger */}
-          <button
-            className="text-white text-2xl focus:outline-none"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? "✖" : "☰"}
-          </button>
+          {isLoggedIn && (
+            <button
+              className="text-white text-2xl focus:outline-none"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? "✖" : "☰"}
+            </button>
+          )}
         </div>
       </div>
 
-      {menuOpen && (
+      {menuOpen && isLoggedIn && (
         <div className="sm:hidden mt-4 px-4 pb-4 flex flex-col space-y-4 bg-white/10 backdrop-blur-md border-t border-white/20">
-          {isLoggedIn && (
-            <Link
-              to="/my-journal"
-              onClick={() => setMenuOpen(false)}
-              className="text-slate-300 hover:text-white transition-colors duration-200"
-            >
-              📓 My Journals
-            </Link>
-          )}
+          <Link
+            to="/my-journal"
+            onClick={() => setMenuOpen(false)}
+            className="text-slate-300 hover:text-white transition-colors duration-200"
+          >
+            📓 My Journals
+          </Link>
 
-          {isLoggedIn && (
-            <button
-              onClick={() => {
-                handleLogout();
-                setMenuOpen(false);
-              }}
-              className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200"
-            >
-              Logout
-            </button>
-          )}
+          <button
+            onClick={() => {
+              handleLogout();
+              setMenuOpen(false);
+            }}
+            className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-left"
+          >
+            Logout
+          </button>
         </div>
       )}
     </nav>
