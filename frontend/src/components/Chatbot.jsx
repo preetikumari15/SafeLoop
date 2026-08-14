@@ -48,7 +48,7 @@ export default function Chatbot() {
       } else {
         setMessages((prev) => [
           ...prev,
-          { sender: "bot", text: "Sorry, I couldn't process that." },
+          { sender: "bot", text: "Sorry, I couldn't process that. Please try again." },
         ]);
       }
     } catch (err) {
