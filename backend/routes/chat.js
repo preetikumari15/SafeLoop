@@ -19,7 +19,7 @@ router.post('/chat', async (req, res) => {
     const ai = new GoogleGenAI({ apiKey });
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3.7-flash', // Updated to a currently supported model
+      model: 'gemini-3.7-flash', 
       contents: message, 
       config: {
         systemInstruction: 'You are a helpful assistant.'
@@ -28,7 +28,6 @@ router.post('/chat', async (req, res) => {
 
     res.json({ response: response.text });
   } catch (error) {
-    console.error('Chatbot API Error:', error);
     res.status(500).json({ error: error.message });
   }
 });
