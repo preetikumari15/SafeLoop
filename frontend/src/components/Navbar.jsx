@@ -24,6 +24,12 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden sm:flex items-center space-x-6 sm:space-x-8">
+          <Link 
+              to="/" 
+              className="text-slate-300 hover:text-white transition-colors duration-200"
+            >
+              🏠 Home
+            </Link>
           {isLoggedIn && (
             <Link 
               to="/my-journal" 
@@ -59,6 +65,13 @@ const Navbar = () => {
 
       {menuOpen && (
         <div className="sm:hidden mt-4 px-4 pb-4 flex flex-col space-y-4 bg-white/10 backdrop-blur-md border-t border-white/20">
+          <Link 
+              to="/" 
+              onClick={() => setMenuOpen(false)}
+              className="text-slate-300 hover:text-white transition-colors duration-200"
+            >
+              🏠 Home
+            </Link>
           {isLoggedIn && (
             <Link 
               to="/my-journal" 

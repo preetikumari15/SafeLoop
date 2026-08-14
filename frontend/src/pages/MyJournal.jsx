@@ -78,7 +78,7 @@ const MyJournal = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-red-300 to-indigo-300 px-2 sm:px-4 py-8 sm:py-20 w-full">
-          <div className="max-w-5xl mx-auto w-full">
+          <div className="max-w-5xl mx-auto w-full mt-20">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black mb-6 sm:mb-10 text-center px-2">
               📚 Your Journal Entries
             </h1>
@@ -93,6 +93,7 @@ const MyJournal = () => {
               >
                 ✏️ Write New Entry
               </Link>
+            
             </div>
 
             {entries.length === 0 ? (

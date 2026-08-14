@@ -11,9 +11,11 @@ import Journal from "./pages/Journal";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MyJournal from "./pages/MyJournal";
+import Navbar from "./components/Navbar";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
+    <Navbar />
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/flow/:emotion" element={<FlowPage /> } />

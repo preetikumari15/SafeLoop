@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Flowers = ({ count = 50 }) => {
   const flowerEmojis = ['🌸', '🌺', '🌼', '🌷'];
@@ -120,6 +121,15 @@ const Step4_WriteOrTalk = () => {
           >
             📞 Talk to someone
           </a>
+          <Link
+            to="/"
+            className="px-8 py-4 bg-white/10 backdrop-blur-sm rounded-xl
+                       border border-white/20 text-white hover:bg-white/50 
+                       transition-all duration-300 text-xl font-medium
+                       hover:scale-105 focus:outline-none focus:ring-2 
+                       focus:ring-white/50">
+            Back to Home 🏠
+          </Link>
         </div>
         
       </div>
