@@ -11,6 +11,8 @@ const Signup = () => {
   });
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -19,6 +21,8 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       const res = await axios.post(
         "https://safeloop-o0pc.onrender.com/api/signup",
@@ -38,6 +42,9 @@ const Signup = () => {
       }
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong.");
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -89,7 +96,7 @@ const Signup = () => {
           >
             {loading ? "Signing up..." : "Sign Up"}
           </button>
-          
+
         </form>
         <p className="text-md text-center mt-4">
           Already have an account?{" "}
