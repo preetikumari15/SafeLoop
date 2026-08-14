@@ -48,7 +48,10 @@ export default function Chatbot() {
       } else {
         setMessages((prev) => [
           ...prev,
-          { sender: "bot", text: "Sorry, I couldn't process that. Please try again." },
+          {
+            sender: "bot",
+            text: "Sorry, I couldn't process that. Please try again.",
+          },
         ]);
       }
     } catch (err) {
@@ -62,7 +65,7 @@ export default function Chatbot() {
   };
 
   <style>
-  {`
+    {`
     @keyframes glow {
       from {
         box-shadow:
@@ -77,14 +80,14 @@ export default function Chatbot() {
       }
     }
   `}
-</style>
+  </style>;
 
   return (
     <div
       style={{
         position: "fixed",
-        bottom: "70px",
-        right: "18px",
+        bottom: "50px",
+        right: "16px",
         zIndex: 1000,
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
@@ -121,8 +124,8 @@ export default function Chatbot() {
                 position: "absolute",
                 bottom: "-6px",
                 right: "25px",
-                width: "12px",
-                height: "12px",
+                width: "8px",
+                height: "8px",
                 backgroundColor: "#fdf4ff",
                 transform: "rotate(45deg)",
                 boxShadow: "3px 3px 8px rgba(211, 119, 242, 0.25)",
@@ -137,8 +140,8 @@ export default function Chatbot() {
               color: "#ffffff",
               border: "none",
               borderRadius: "50%",
-              width: "70px",
-              height: "70px",
+              width: "50px",
+              height: "50px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -161,8 +164,9 @@ export default function Chatbot() {
       {isOpen && (
         <div
           style={{
-            width: "400px",
-            height: "580px",
+            width: "min(400px, calc(100vw - 24px))",
+            height: "min(580px, calc(100vh - 100px))",
+            minHeight: "400px",
             backgroundColor: "#ffffff",
             borderRadius: "16px",
             boxShadow:
