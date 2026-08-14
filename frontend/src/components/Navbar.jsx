@@ -6,13 +6,27 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    const checkAuth = () => {
+      const token = localStorage.getItem("token");
+      setIsLoggedIn(!!token);
+    };
+    checkAuth();
+    // Listen for login/logout
+    window.addEventListener("authChange", checkAuth);
+    return () => {
+      window.removeEventListener("authChange", checkAuth);
+    };
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("emergencyContact");
+
     setIsLoggedIn(false);
+
+    window.dispatchEvent(new Event("authChange"));
+
     window.location.href = "/";
   };
 

@@ -23,6 +23,7 @@ const Login = () => {
       );
 
       localStorage.setItem("token", res.data.token);
+      window.dispatchEvent(new Event("authChange"));
 
       navigate("/");
     } catch (err) {
