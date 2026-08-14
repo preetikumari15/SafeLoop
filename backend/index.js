@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const auth = require('./routes/auth.js');
 const journalRoutes = require('./routes/journal');
+const chatRoutes = require('./routes/chat');
 require('dotenv').config();
 
 const app = express();
@@ -20,6 +22,7 @@ app.use(express.json());
 
 app.use('/api', auth); 
 app.use('/api/journal', journalRoutes);
+app.use('/api', chatRoutes);
 
 // MongoDB connection
 const uri = process.env.MONGODB_URI;

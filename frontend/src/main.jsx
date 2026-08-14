@@ -12,10 +12,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MyJournal from "./pages/MyJournal";
 import Navbar from "./components/Navbar";
+import Chatbot from "./components/Chatbot";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Navbar />
+    <Chatbot/>
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/flow/:emotion" element={<FlowPage /> } />
