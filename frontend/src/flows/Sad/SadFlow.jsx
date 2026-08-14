@@ -101,7 +101,7 @@ const SadFlow = () => {
               <div className="aspect-video rounded-xl overflow-hidden border border-white/20">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/ON5AAcbiW2M"
+                  src="https://www.youtube.com/embed/79kpoGF8KWU"
                   title="Calm Piano Music"
                   allow="autoplay; encrypted-media"
                   allowFullScreen
@@ -110,7 +110,7 @@ const SadFlow = () => {
               <div className="aspect-video rounded-xl overflow-hidden border border-white/20">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/E5pPOdHXm48"
+                  src="https://www.youtube.com/embed/sCgFxMhvEeA"
                   title="Peaceful Nature Sounds"
                   allow="autoplay; encrypted-media"
                   allowFullScreen
